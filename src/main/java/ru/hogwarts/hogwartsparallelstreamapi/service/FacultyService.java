@@ -11,8 +11,10 @@ import ru.hogwarts.hogwartsparallelstreamapi.repository.FacultyRepository;
 import ru.hogwarts.hogwartsparallelstreamapi.exception.BadRequestException;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class FacultyService implements IFaculty {
@@ -74,6 +76,14 @@ public class FacultyService implements IFaculty {
     public Collection<Faculty> findFacultyByColorIgnoreCase(String color) {
         logger.info("Was invoked method for find faculty by color ignore case");
         return facultyRepository.findFacultyByColorIgnoreCase(color);
+    }
+
+
+    public String longestFacultyName() {
+        logger.info("Was invoked method for find longest faculty name");
+        return facultyRepository.findAll().stream()
+                .max(Comparator.comparingInt(f -> f.getName().length()))
+                .get().getName();
     }
 
 

@@ -87,22 +87,16 @@ public class StudentController {
     }
 
 
+    @GetMapping(path = "/nameWithStartedA")
+    public Collection<String> getStudentInfoWithLetterA() {
+        return studentService.getStudentInfoWithLetterA();
+    }
 
 
-
-
-
-//    @GetMapping()
-//    public ResponseEntity<Student> getStudentInfoWithLetterA(@PathVariable Long id) {
-//        Student student = studentService.findStudent(id);
-//        if (student == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(student);
-//    }
-
-
-
+    @GetMapping(path = "/getStudentAverageAge")
+    public double getStudentAverageAge() {
+        return studentService.getStudentAverageAge();
+    }
 
 
 }
