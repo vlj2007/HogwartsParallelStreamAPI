@@ -10,7 +10,9 @@ import ru.hogwarts.hogwartsparallelstreamapi.repository.StudentRepository;
 import ru.hogwarts.hogwartsparallelstreamapi.exception.BadRequestException;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService implements IStudent {
@@ -86,4 +88,29 @@ public class StudentService implements IStudent {
         logger.info("Was invoked method for find student by name ignore case is like");
         return studentRepository.findStudentByNameIgnoreCaseIsLike(like);
     }
+
+    public Collection<String> getStudentInfoWithLetterA() {
+        logger.info("Was invoked method for find all student with letter A");
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .filter(name -> name.startsWith("A"))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public double getStudentAverageAge() {
+        logger.info("Was invoked method for find all student with Average Age");
+        return studentRepository.findAll().stream()
+                .map(Student::getAge)
+                .mapToInt(o->o)
+                .average()
+                .orElseThrow(BadRequestException::new);
+    }
+
+
+
 }
+
+
+
