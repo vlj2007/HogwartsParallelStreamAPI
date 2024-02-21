@@ -9,10 +9,13 @@ import ru.hogwarts.hogwartsparallelstreamapi.model.Faculty;
 import ru.hogwarts.hogwartsparallelstreamapi.model.Student;
 import ru.hogwarts.hogwartsparallelstreamapi.repository.FacultyRepository;
 import ru.hogwarts.hogwartsparallelstreamapi.exception.BadRequestException;
+import ru.hogwarts.hogwartsparallelstreamapi.exception.FacultyListIsEmptyException;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class FacultyService implements IFaculty {
@@ -74,6 +77,16 @@ public class FacultyService implements IFaculty {
     public Collection<Faculty> findFacultyByColorIgnoreCase(String color) {
         logger.info("Was invoked method for find faculty by color ignore case");
         return facultyRepository.findFacultyByColorIgnoreCase(color);
+    }
+
+
+    public String longestFacultyName() {
+        logger.info("Was invoked method for find longest faculty name");
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElseThrow(() -> new FacultyListIsEmptyException("List is empty"));
+
     }
 
 

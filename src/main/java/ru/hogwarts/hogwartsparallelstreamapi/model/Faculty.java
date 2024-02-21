@@ -28,6 +28,10 @@ public class Faculty {
         this.color = color;
     }
 
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
     public long getId() {
         return id;
     }
