@@ -73,7 +73,7 @@ public class StudentController {
         return ResponseEntity.ok((studentService.findStudentByAge(age)));
     }
 
-    @GetMapping(path = "/findstudent/{like}")
+    @GetMapping(path = "/find-student/{like}")
     public Collection<Student> findStudentByNameIgnoreCaseIsLike(@PathVariable String like) {
         return studentService.findStudentByNameIgnoreCaseIsLike(like);
     }
@@ -87,22 +87,16 @@ public class StudentController {
     }
 
 
+    @GetMapping(path = "/name-with-started-a")
+    public Collection<String> getStudentInfoWithLetterA(String startLetter) {
+        return studentService.getStudentNamesStartingWithLetterInUpperCase(startLetter);
+    }
 
 
-
-
-
-//    @GetMapping()
-//    public ResponseEntity<Student> getStudentInfoWithLetterA(@PathVariable Long id) {
-//        Student student = studentService.findStudent(id);
-//        if (student == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(student);
-//    }
-
-
-
+    @GetMapping(path = "/get-student-average-age")
+    public double getStudentAverageAge() {
+        return studentService.getStudentAverageAge();
+    }
 
 
 }

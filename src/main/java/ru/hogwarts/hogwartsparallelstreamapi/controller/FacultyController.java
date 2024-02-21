@@ -61,7 +61,7 @@ public class FacultyController {
         return ResponseEntity.ok(Collections.emptyList());
     }
 
-    @GetMapping(path = "/nameorcolor")
+    @GetMapping(path = "/name-or-color")
     public ResponseEntity<Collection<Faculty>> findFacultyByNameOrColor(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
         if (name != null && !name.isBlank()) {
             ResponseEntity<Collection<Faculty>> responseEntity = ResponseEntity.ok(facultyService.findFacultyByNameIgnoreCase(name));
@@ -75,4 +75,12 @@ public class FacultyController {
         return ResponseEntity.ok(facultyService.showAllFaculty());
 
     }
+
+    @GetMapping("/longest-faculty-name")
+    public ResponseEntity<String> longestFacultyName(){
+        return ResponseEntity.ok(facultyService.longestFacultyName());
+    }
+
+
+
 }
