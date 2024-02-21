@@ -92,11 +92,29 @@ public class StudentController {
         return studentService.getStudentNamesStartingWithLetterInUpperCase(startLetter);
     }
 
-
     @GetMapping(path = "/get-student-average-age")
     public double getStudentAverageAge() {
         return studentService.getStudentAverageAge();
     }
+
+
+    @GetMapping("/print-parallel")
+    public void  getNameStudent(){
+        studentService.printNameParallel();
+
+    }
+
+
+    @GetMapping("/print-synchronized")
+    public void  getNameStudentSync(){
+        studentService.printNameParallelSync();
+
+    }
+
+
+
+
+
 
 
 }

@@ -109,6 +109,60 @@ public class StudentService implements IStudent {
     }
 
 
+    public List<Student> findAll() {
+        logger.info("Was invoked method for findAll student");
+        return studentRepository.findAll();
+    }
+
+
+    public void printName(int i){
+        logger.info("Was invoked method for print name student");
+        System.out.println(findAll().get(i).getName());
+    }
+
+
+    //Разные потоки выводятся параллельно
+
+    public void printNameParallel(){
+        logger.info("Was invoked method for print name student parallel");
+        printName(0);//Lucius Malfoy
+
+        new Thread(()->{
+            printName(2); // Aberforth Dumbledore
+            printName(3); // Fred Weasley
+        }).start();
+
+        new Thread(()->{
+            printName(4);//Albus Dumbledore
+            printName(5); //George Weasley
+        }).start();
+
+        printName(1);
+    }
+
+    //Разные потоки выводятся по очередно
+    public synchronized void printNameSync(int i){
+        logger.info("Was invoked method for print name sync student");
+        System.out.println(findAll().get(i).getName());
+    }
+
+    public void printNameParallelSync(){
+        logger.info("Was invoked method for print name sync student parallel");
+        printNameSync(0); //Lucius Malfoy
+
+        new Thread(()->{
+            printNameSync(2);
+            printNameSync(3);
+        }).start();
+
+        new Thread(()->{
+            printNameSync(4);
+            printNameSync(5);
+        }).start();
+
+        printNameSync(1);
+
+    }
 
 }
 
