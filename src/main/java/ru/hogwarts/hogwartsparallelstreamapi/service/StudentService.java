@@ -89,12 +89,12 @@ public class StudentService implements IStudent {
         return studentRepository.findStudentByNameIgnoreCaseIsLike(like);
     }
 
-    public Collection<String> getStudentInfoWithLetterA() {
+    public Collection<String> getStudentNamesStartingWithLetterInUpperCase(String startLetter) {
         logger.info("Was invoked method for find all student with letter A");
         return studentRepository.findAll().stream()
                 .map(Student::getName)
                 .map(String::toUpperCase)
-                .filter(name -> name.startsWith("A"))
+                .filter(name -> name.startsWith(startLetter))
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -105,7 +105,7 @@ public class StudentService implements IStudent {
                 .map(Student::getAge)
                 .mapToInt(o->o)
                 .average()
-                .orElseThrow(BadRequestException::new);
+                .orElse(0.0);
     }
 
 

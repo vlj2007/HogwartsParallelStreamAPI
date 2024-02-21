@@ -77,7 +77,7 @@ public class AvatarController {
         return ResponseEntity.ok(avatarService.summa());
     }
 
-    @GetMapping("/summaParallel")
+    @GetMapping("/summa-Parallel")
     public ResponseEntity<Integer> getTimeParallel(){
         return ResponseEntity.ok(avatarService.summaParallel());
     }

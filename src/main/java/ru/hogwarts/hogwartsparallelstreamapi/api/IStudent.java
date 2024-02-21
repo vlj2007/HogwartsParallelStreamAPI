@@ -30,7 +30,7 @@ public interface IStudent {
 
     Collection<Student> findStudentByNameIgnoreCaseIsLike(String like);
 
-    Collection<String> getStudentInfoWithLetterA();
+    Collection<String> getStudentNamesStartingWithLetterInUpperCase(String startLetter);
 
     double getStudentAverageAge();
 }
